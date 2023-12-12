@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#2196f3">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>Welcome to Book store</title>
+    <link rel="apple-touch-icon" href="img/f7-icon-square.png">
+    <link rel="icon" href="img/f7-icon.png">
+    <link rel="stylesheet" href="./index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- Status bar overlay for fullscreen mode-->
+        <div class="statusbar"></div>
+        <!-- Main view -->
+        <div class="view view-main view-init ios-edges" data-url="/">
+            <div class="page">
+                <nav class="navbar">
+                    <div class="navbar-inner">
+                        <h1 class="title sliding">Books Login</h1>
+                    </div>
+                </nav>
+                <main class="page-content">
+                    <!-- content goes there -->
+                    <div class="tabs">
+                        <div id="tab1" class="block tab tab-active">
+                            <div class="row">&nbsp;
+                                <p id="loginSignin" class="segmented segmented-raised">
+                                    <a href="#" class="button login-screen-open" data-login-screen=".signupYes">Sign
+                                        Up</a>
+                                    <a href="#" class="button button-active login-screen-open"
+                                        data-login-screen=".loginYes">Sign In</a>
+                                </p>
+                            </div>
+                            <p>This application saves the data of books into real-time firestore database.</p>
+                        </div>
+                        <div id="tab2" class="block tab">
+                            <div class="row">&nbsp;<button id="logout" class="button button-raised">Logout</button>
+                            </div>
+                            <!-- Green FAB -->
+                            <div class="fab fab-right-bottom color-green">
+                                <a href="#" data-sheet=".my-sheet" class="sheet-open">
+                                    <i class="icon f7-icons">add</i>
+                                </a>
+                            </div>
+                            <div id="bookList">This is for the display of the Book list</div>
+                        </div>
+                    </div>
+                </main>
+				<div class="login-screen loginYes">
+					<div class="view">
+						<div class="page">
+							<div class="page-content login-screen-content">
+								<div class="login-screen-title">Login</div>
+								<button id="googleLoginButton" class="button custom-btn">Login with Google</button>
+								<form id="loginForm">
+									<div class="list">
+										<ul>
+											<li class="item-content item-input">
+												<div class="item-inner">
+													<div class="item-title item-label">Username</div>
+													<div class="item-input-wrap">
+														<input type="text" name="username" placeholder="Your email" />
+                    </div>
+													</div>
+											</li>
+											<li class="item-content item-input">
+												<div class="item-inner">
+													<div class="item-title item-label">Password</div>
+													<div class="item-input-wrap">
+														<input type="password" name="password" placeholder="Your password" />
+                    </div>
+													</div>
+											</li>
+										</ul>
+									</div>
+									<div class="list">
+										<ul>
+											<li><button type="submit" id="signInButton" class="button button-active">Sign In</a>
+											</li>
+										</ul>
+										<div class="block-footer">
+											<p id="signInError"></p>
+											<p><a class="link login-screen-close" href="#">Close Login Screen</a></p>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+                <div class="login-screen signupYes">
+                    <div class="view">
+                        <div class="page">
+                            <div class="page-content login-screen-content">
+                                <div class="login-screen-title">Signup</div>
+                                <form id="signUpForm">
+                                    <div class="list">
+                                        <ul>
+                                            <li class="item-content item-input">
+                                                <div class="item-inner">
+                                                    <div class="item-title item-label">Username</div>
+                                                    <div class="item-input-wrap">
+                                                        <input type="text" name="username" placeholder="Your email" />
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item-content item-input">
+                                                <div class="item-inner">
+                                                    <div class="item-title item-label">Password</div>
+                                                    <div class="item-input-wrap">
+                                                        <input type="password" name="password" placeholder="Your password" />
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="list">
+                                        <ul>
+                                            <li><button id="signUpButton" type="submit" class="button button-active">Sign
+                                                    Up</button>
+                                            </li>
+                                        </ul>
+                                        <div class="block-footer">
+                                            <p id="signUpError"></p>
+                                            <p><a class="link login-screen-close" href="#">Close Login Screen</a></p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Grocery drawer -->
+                <form id="addItem" class="sheet-modal my-sheet list">
+                    <div class="toolbar">
+                        <div class="toolbar-inner block">
+                            <div class="left">Add a Book</div>
+                            <p id="closeSave" class="segmented segmented-raised">
+                                <a href="#" class="button sheet-close">Close
+                                </a>
+                                <button type="submit" class="button button-active">Save</button>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="sheet-modal-inner">
+                        <ul>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <label for="item" class="item-title item-label">Book Name:</label>
+                                        <div class="item-input-wrap">
+                                            <input id="item" type="text" name="item" placeholder="Item required" class="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <label for="qty" class="item-title item-label">Available Quantity:</label>
+                                        <div class="item-input-wrap">
+                                            <input id="qty" type="text" name="availableQuantity" placeholder="Available Quantity"
+                                                class="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <label for="price" class="item-title item-label">Price:</label>
+                                        <div class="item-input-wrap">
+                                            <input id="price" type="text" name="price" placeholder="Price"
+                                                class="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+							<li>
+								<div class="item-content item-input">
+									<div class="item-inner">
+										<label for="url" class="item-title item-label">Image URL: </label>
+										<div class="item-input-wrap">
+											<input id="url" type="url" name="url" placeholder="Book URL" class="">
+										</div>
+									</div>
+								</div>
+							</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./index.js" type="module"></script>
+</body>
+
+</html>
